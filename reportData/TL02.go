@@ -42,7 +42,6 @@ func CheckTL02() {
 	f, err := os.OpenFile(fileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	log.Println(date + "_sortedAll2One_TL02.csv is Created!")
 	for i, each_ln := range text {
-
 		if err != nil {
 			log.Println(err)
 		}
@@ -50,9 +49,9 @@ func CheckTL02() {
 		each_ln = each_ln[1:17]
 		if strings.Contains(each_ln, `-`) {
 			SaveTxnNo(each_ln[6:16])
-			if i == 1 {
+			if i == 0 {
 				CheckTxnStartCorrect(lastTxn[6:16], each_ln[6:16])
-
+				f.WriteString(each_ln + "\n")
 			} else if _, err := f.WriteString(each_ln + "\n"); err != nil {
 				log.Println(err)
 			} else if txnNoInInt, err := strconv.Atoi(each_ln[6:16]); err != nil {
@@ -273,6 +272,21 @@ func CheckTL02ALL() {
 						missRecord = "30101-00" + strconv.Itoa(miss)
 					}
 					log.Println("Missing Txn Record: ", missRecord)
+					f, err := os.OpenFile("SaveMissingTxn.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+					if err != nil {
+						log.Println(err)
+					}
+					fileMissSaveFile := "SaveMissingTxn.txt"
+					fileMissSave, err := ioutil.ReadFile(fileMissSaveFile)
+					if err != nil {
+						return
+					}
+					s := string(fileMissSave)
+					if strings.Contains(s, missRecord) {
+
+					} else {
+						f.WriteString(missRecord + "\n")
+					}
 				}
 			}
 			txnFirst = txnAfter
@@ -281,3 +295,11 @@ func CheckTL02ALL() {
 	file.Close()
 	log.Println("----------End Checking All Txn Record----------")
 }
+
+// func SaveMissingTxn() {
+// 	file, err := os.Open("SaveMissingTxn.txt")
+// 	if err != nil {
+// 		log.Println(err)
+// 	}
+
+// }

@@ -1,69 +1,38 @@
-"30101-0000000166","SAL","2021-10-10 00:19:57","8042","4550182146752","3","-1","2","2021-10-10 00:19:57","TL"
-"30101-0000000166","SAL","2021-10-10 00:19:57","8042","4550182146752","3","-1","2","2021-10-10 00:19:57","TL"
-"30101-0000000167","SAL","2021-10-10 07:59:25","8042","4550182150674","62","-1","61","2021-10-10 07:59:25","TL"
-"30101-0000000167","SAL","2021-10-10 07:59:25","8042","4550182150674","62","-1","61","2021-10-10 07:59:25","TL"
-"30101-0000000168","SAL","2021-10-10 08:34:42","8042","4550182146752","2","-2","0","2021-10-10 08:34:42","TL"
-"30101-0000000168","SAL","2021-10-10 08:34:42","8042","4550182146752","2","-2","0","2021-10-10 08:34:42","TL"
-"30101-0000000169","SAL","2021-10-10 13:24:13","8042","4550344255681","7","-1","6","2021-10-10 13:24:13","TL"
-"30101-0000000169","SAL","2021-10-10 13:24:13","8042","4550344255681","7","-1","6","2021-10-10 13:24:13","TL"
-"30101-0000000170","SAL","2021-10-10 14:47:18","8042","4550182150674","61","-1","60","2021-10-10 14:47:18","TL"
-"30101-0000000170","SAL","2021-10-10 14:47:18","8042","4550182150674","61","-1","60","2021-10-10 14:47:18","TL"
-"30101-0000000171","SAL","2021-10-10 17:19:11","8042","4550182150674","60","-1","59","2021-10-10 17:19:11","TL"
-"30101-0000000171","SAL","2021-10-10 17:19:11","8042","4550182150674","60","-1","59","2021-10-10 17:19:11","TL"
-"30101-0000000172","SAL","2021-10-10 17:19:58","8042","4550344255681","6","0","6","2021-10-10 17:19:58","TL"
-"30101-0000000172","SAL","2021-10-10 17:19:58","8042","4550344255681","6","0","6","2021-10-10 17:19:58","TL"
-"30101-0000000173","SAL","2021-10-10 17:27:36","8042","4550344457986","5","-1","4","2021-10-10 17:27:36","TL"
-"30101-0000000173","SAL","2021-10-10 17:27:36","8042","4550344457986","5","-1","4","2021-10-10 17:27:36","TL"
-"30101-0000000174","SAL","2021-10-10 19:49:54","8042","4550182144093","4","-1","3","2021-10-10 19:49:54","TL"
-"30101-0000000174","SAL","2021-10-10 19:49:54","8042","4550182144093","4","-1","3","2021-10-10 19:49:54","TL"
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
-Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
+"30101-0000000135","SAL","2021-10-07 22:43:55","8042","4550344295663","11","-1","10","2021-10-07 22:43:55","TL"
+"30101-0000000136","SAL","2021-10-08 05:02:50","8042","4550344446751","4","-1","3","2021-10-08 05:02:50","TL"
+"30101-0000000137","SAL","2021-10-08 08:37:31","8042","4550182150674","70","-1","69","2021-10-08 08:37:31","TL"
+"30101-0000000138","SAL","2021-10-08 10:17:16","8042","4550182150674","69","-1","68","2021-10-08 10:17:16","TL"
+"30101-0000000139","SAL","2021-10-08 11:39:33","8042","4550344295700","14","-1","13","2021-10-08 11:39:33","TL"
+"30101-0000000140","SAL","2021-10-08 12:16:52","8042","4550182146752","10","-1","9","2021-10-08 12:16:52","TL"
+"30101-0000000141","SAL","2021-10-08 12:33:27","8042","4550182143331","10","-1","9","2021-10-08 12:33:27","TL"
+"30101-0000000142","SAL","2021-10-08 12:54:23","8042","4550344457986","7","-1","6","2021-10-08 12:54:23","TL"
+"30101-0000000143","SAL","2021-10-08 13:11:02","8042","4550344584408","4","-1","3","2021-10-08 13:11:02","TL"
+"30101-0000000144","SAL","2021-10-08 13:21:18","8042","4550182146752","9","-1","8","2021-10-08 13:21:18","TL"
+"30101-0000000145","SAL","2021-10-08 14:22:18","8042","4550182150117","83","-1","82","2021-10-08 14:22:18","TL"
+"30101-0000000146","SAL","2021-10-08 15:36:44","8042","4550182150674","68","-1","67","2021-10-08 15:36:44","TL"
+"30101-0000000147","SAL","2021-10-08 16:04:42","8042","4550344255681","9","-1","8","2021-10-08 16:04:42","TL"
+"30101-0000000148","SAL","2021-10-08 16:50:18","8042","4550344584392","4","-1","3","2021-10-08 16:50:18","TL"
+"30101-0000000149","SAL","2021-10-08 17:53:29","8042","4550344584408","3","-1","2","2021-10-08 17:53:29","TL"
+"30101-0000000150","SAL","2021-10-08 18:15:51","8042","4550182146752","8","-1","7","2021-10-08 18:15:51","TL"
+"30101-0000000151","SAL","2021-10-08 18:47:56","8042","4550344584392","3","-1","2","2021-10-08 18:47:56","TL"
+"30101-0000000152","SAL","2021-10-08 18:51:16","8042","4550182150674","67","-2","65","2021-10-08 18:51:16","TL"
+"30101-0000000153","SAL","2021-10-08 19:59:03","8042","4550182150674","65","-1","64","2021-10-08 19:59:03","TL"
+"30101-0000000154","SAL","2021-10-08 20:59:38","8042","4550182146752","7","-1","6","2021-10-08 20:59:38","TL"
+"30101-0000000155","SAL","2021-10-08 21:00:37","8042","4550182146752","6","-1","5","2021-10-08 21:00:37","TL"
+"30101-0000000156","SAL","2021-10-08 22:40:00","8042","4550182150674","64","-1","63","2021-10-08 22:40:00","TL"
+"30101-0000000157","SAL","2021-10-08 22:40:33","8042","4550182146752","5","-1","4","2021-10-08 22:40:33","TL"
+"30101-0000000158","SAL","2021-10-08 22:41:06","8042","4550344255681","8","-1","7","2021-10-08 22:41:06","TL"
+"8042-r1633662084","REF","2021-10-08 11:01:21","8042","4550002854089","9","1","10","2021-10-08 11:01:20","TL"
+"8042-r1633662084","REF","2021-10-08 11:01:21","8042","4550182144017","3","1","4","2021-10-08 11:01:20","TL"
+"8042-r1633662084","REF","2021-10-08 11:01:21","8042","4550182146752","7","3","10","2021-10-08 11:01:20","TL"
+"8042-r1633662084","REF","2021-10-08 11:01:21","8042","4550182505832","5","1","6","2021-10-08 11:01:20","TL"
+"8042-r1633662084","REF","2021-10-08 11:01:21","8042","4550344255681","6","3","9","2021-10-08 11:01:20","TL"
+"8042-r1633662084","REF","2021-10-08 11:01:21","8042","4550344295656","6","4","10","2021-10-08 11:01:20","TL"
+"8042-r1633662084","REF","2021-10-08 11:01:21","8042","4550344295663","10","3","13","2021-10-08 11:01:20","TL"
+"8042-r1633662084","REF","2021-10-08 11:01:21","8042","4550344295700","11","3","14","2021-10-08 11:01:20","TL"
+"8042-r1633662084","REF","2021-10-08 11:01:21","8042","4550344457986","0","7","7","2021-10-08 11:01:20","TL"
+"8042-r1633662084","REF","2021-10-08 11:01:21","8042","4550344584392","0","4","4","2021-10-08 11:01:20","TL"
+"8042-r1633662084","REF","2021-10-08 11:01:21","8042","4550344584408","0","4","4","2021-10-08 11:01:20","TL"
 Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
 Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
 Transaction Number,Transaction Type,Transaction Date Time,Vending Machine ID,JAN,Old Quantity,Transaction Quantity,New Quantity,Last Updated Date,Last Updated By
