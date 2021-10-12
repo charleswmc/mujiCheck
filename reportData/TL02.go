@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"mujiCheck/utils"
 	"os"
 	"strconv"
 	"strings"
@@ -64,6 +65,8 @@ func CheckTL02() {
 					txn2 = txnNoInInt
 					cal := txn2 - txn1
 					if cal != 1 {
+						// Add checking - if Txn exists in TxnRecord_Saved.txt return
+						//if !CheckIfItIsRepost(txn1) {
 						for i := 1; i < cal; i++ {
 							miss := txn2 - (cal - i)
 							if len(strconv.Itoa(txn2)) == 3 {
@@ -91,6 +94,7 @@ func CheckTL02() {
 								fmt.Println("Missing Txn Record: " + missRecord)
 							}
 						}
+						//}
 					}
 					txn1 = txnNoInInt
 				}
@@ -101,6 +105,7 @@ func CheckTL02() {
 	}
 	LastTxnForLastCheck(strconv.Itoa(txn1))
 	file.Close()
+	// CheckTL02ALL()
 	log.Println("----------End Checking TL02 Daily----------")
 }
 
@@ -199,7 +204,8 @@ func CheckTxnStartCorrect(lastTxn string, txnStart string) {
 
 func SaveTxnNo(txn string) {
 	fileName := "TL02/8042/TxnRecord.txt"
-	fileSaved := "TL02/8042/TxnRecord_Saved.txt"
+	// fileSaved := "TL02/8042/TxnRecord_Saved.txt"
+	fileSaved := "TL02/8042/TxnRecord_Sort.txt"
 	file, err := ioutil.ReadFile(fileSaved)
 	if err != nil {
 		return
@@ -223,7 +229,8 @@ func CheckTL02ALL() {
 	var text []string
 	var txnFirst, txnAfter int
 	var missRecord string
-	fileName := "TL02/8042/TxnRecord_Saved.txt"
+	// fileName := "TL02/8042/TxnRecord_Saved.txt"
+	fileName := "TL02/8042/TxnRecord_Sort.txt"
 	file, err := os.Open(fileName)
 	if err != nil {
 		log.Println(err)
@@ -248,10 +255,12 @@ func CheckTL02ALL() {
 				return
 			}
 			cal := txnAfter - txnFirst
-			// log.Println(i, cal)
+			// log.Println(txnAfter, txnFirst, i, cal)
 			// miss := txnAfter - txnFirst
+			// fmt.Println(miss)
 			if cal != 1 {
 				for a := 1; a < cal; a++ {
+					// log.Println("Miss record ARRRRRRRRRRRRRRRRRRRRRRRRRR")
 					miss := txnFirst + a
 					if len(strconv.Itoa(txnAfter)) == 3 {
 						missRecord = "30101-0000000" + strconv.Itoa(miss)
@@ -294,6 +303,106 @@ func CheckTL02ALL() {
 	}
 	file.Close()
 	log.Println("----------End Checking All Txn Record----------")
+}
+
+func CheckIfItIsRepost(txnNo int) bool {
+	var text []string
+	var repostData string
+	txnNoLen := len(strconv.Itoa(txnNo))
+	if txnNoLen == 3 {
+		repostData = "30101-0000000" + strconv.Itoa(txnNo)
+	}
+	if txnNoLen == 4 {
+		repostData = "30101-000000" + strconv.Itoa(txnNo)
+	}
+	if txnNoLen == 5 {
+		repostData = "30101-00000" + strconv.Itoa(txnNo)
+	}
+	if txnNoLen == 6 {
+		repostData = "30101-0000" + strconv.Itoa(txnNo)
+	}
+	if txnNoLen == 7 {
+		repostData = "30101-000" + strconv.Itoa(txnNo)
+	}
+	if txnNoLen == 8 {
+		repostData = "30101-00" + strconv.Itoa(txnNo)
+	}
+	// fileName := "TL02/8042/TxnRecord_Saved.txt"
+	fileName := "TL02/8042/TxnRecord_Sort.txt"
+	file, err := os.Open(fileName)
+	if err != nil {
+		log.Println(err)
+	}
+	scanner := bufio.NewScanner(file)
+	scanner.Split(bufio.ScanLines)
+	for scanner.Scan() {
+		message := scanner.Text()
+		text = append(text, message)
+	}
+	for _, each_ln := range text {
+		if strings.EqualFold(each_ln, repostData) {
+			return true
+		}
+	}
+	file.Close()
+	return false
+}
+
+func SaveToSortTxnRecordFile() { // Save Txn Record to TxnRecord_Sort.txt
+	var text []string
+	fileName := "TL02/8042/TxnRecord.txt"
+	file, err := os.Open(fileName)
+	if err != nil {
+		log.Println(err)
+	}
+	scanner := bufio.NewScanner(file)
+	scanner.Split(bufio.ScanLines)
+	for scanner.Scan() {
+		message := scanner.Text()
+		text = append(text, message)
+	}
+	length := len(text)
+	fileSort := "TL02/8042/TxnRecord_Sort.txt"
+	f, err := os.OpenFile(fileSort, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		log.Println(err)
+	}
+	defer f.Close()
+	for i := 0; i < length; i++ {
+		// fmt.Println(utils.SortASC(text)[i])
+		if !utils.FindExistString(fileSort, utils.SortASC(text)[i]) {
+			f.WriteString(utils.SortASC(text)[i] + "\n")
+		}
+	}
+}
+
+func SortTxnRecordFile() {
+	var text []string
+	fileName := "TL02/8042/TxnRecord_Sort.txt"
+	file, err := os.Open(fileName)
+	if err != nil {
+		log.Println(err)
+	}
+	scanner := bufio.NewScanner(file)
+	scanner.Split(bufio.ScanLines)
+	for scanner.Scan() {
+		message := scanner.Text()
+		text = append(text, message)
+	}
+	length := len(text)
+	// fileSort := "TL02/8042/TxnRecord_Sort.txt"
+	f, err := os.OpenFile(fileName, os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		log.Println(err)
+	}
+	defer f.Close()
+	for i := 0; i < length; i++ {
+		// fmt.Println(utils.SortASC(text)[i])
+		f.WriteString(utils.SortASC(text)[i] + "\n")
+		// if !utils.FindExistString(fileSort, utils.SortASC(text)[i]) {
+		// f.WriteString(utils.SortASC(text)[i] + "\n")
+		// }
+	}
 }
 
 // func SaveMissingTxn() {
