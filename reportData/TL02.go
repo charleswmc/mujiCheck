@@ -287,14 +287,14 @@ func CheckTL02ALL() {
 					if err != nil {
 						log.Println(err)
 					}
-					fileMissSaveFile := "SaveMissingTxn.txt"
+					fileMissSaveFile := "SaveMissingTxn.txt" // JUST for Record/References, not used
 					fileMissSave, err := ioutil.ReadFile(fileMissSaveFile)
 					if err != nil {
 						return
 					}
 					s := string(fileMissSave)
 					if strings.Contains(s, missRecord) {
-
+						continue
 					} else {
 						f.WriteString(missRecord + "\n")
 					}
@@ -414,3 +414,144 @@ func SortTxnRecordFile() {
 // 	}
 
 // }
+
+func CheckTL02File() {
+	path := "TL02/SFTP_file"
+	dir, err := os.ReadDir(path)
+	var counter int
+	if err != nil {
+		log.Println("Cannot read directory when update octopus upload")
+		return
+	}
+	for _, f := range dir {
+		name := f.Name()
+		fmt.Println(name)
+		info, err := os.Stat(path + "/" + name)
+		if err != nil {
+			log.Println(err)
+		}
+		fileSize := info.Size()
+		fmt.Println(fileSize)
+		if fileSize < 693 {
+			log.Println("File Size is abnormal, Please Check the file: ", name)
+		}
+		counter++ // 1 day should have 96 files, if do checking at 2300, should have 100 files. files from 2205 to another day 2250
+	}
+	if counter != 100 {
+		log.Println("No. of Files is not matched. There is missing files")
+	}
+
+}
+
+func CheckTL02MissingFile() {
+	path := "TL02/SFTP_file"
+	dir, err := os.ReadDir(path)
+	var counter, counter1, counter2, counter3, counter4 int
+	var namePrevious05, namePrevious20, namePrevious35, namePrevious50 string
+	var nameNow05, nameNow20, nameNow35, nameNow50 string
+	if err != nil {
+		log.Println("Cannot read directory when update octopus upload")
+		return
+	}
+	for i, f := range dir {
+		name := f.Name()
+		if strings.Contains(name, "05.csv") {
+			nameNow05 = name
+			counter1++
+		} else if strings.Contains(name, "20.csv") {
+			nameNow20 = name
+			counter2++
+		} else if strings.Contains(name, "35.csv") {
+			nameNow35 = name
+			counter3++
+		} else if strings.Contains(name, "50.csv") {
+			nameNow50 = name
+			counter4++
+		}
+		if counter1 != 0 {
+			fmt.Println(i, "previours: ", namePrevious05, "now: ", nameNow05, "counter", counter1)
+		} else if counter2 != 0 {
+			fmt.Println(i, "previours: ", namePrevious20, "now: ", nameNow20, "counter", counter2)
+		} else if counter3 != 0 {
+			fmt.Println(i, "previours: ", namePrevious35, "now: ", nameNow35, "counter", counter3)
+		} else if counter4 != 0 {
+			fmt.Println(i, "previours: ", namePrevious50, "now: ", nameNow50, "counter", counter4)
+		}
+
+		// fmt.Println("move now to previous: ", namePrevious)
+		counter++
+		namePrevious05 = nameNow05
+		namePrevious20 = nameNow20
+		namePrevious35 = nameNow35
+		namePrevious50 = nameNow50
+	}
+	if counter1 < 25 {
+		// GetTL02MissingFile("05.csv")
+		fmt.Println("Some 05.csv is missing")
+	}
+	if counter2 < 25 {
+		// GetTL02MissingFile("20.csv")
+		fmt.Println("Some 20.csv is missing")
+	}
+	if counter3 < 25 {
+		// GetTL02MissingFile("35.csv")
+		fmt.Println("Some 35.csv is missing")
+	}
+	if counter4 < 25 {
+		// GetTL02MissingFile("50.csv")
+		fmt.Println("Some 50.csv is missing")
+	}
+}
+
+func GetTL02MissingFile(fn string) (fileName string) {
+	path := "TL02/SFTP_file"
+	dir, err := os.ReadDir(path)
+	var counter, hourCounter int
+	exist := false
+	if err != nil {
+		log.Println("Cannot read directory when update octopus upload")
+		return
+	}
+	hour := 22
+	if fn == "05.csv" {
+		counter = 0
+	} else if fn == "20.csv" {
+		counter = 1
+	} else if fn == "35.csv" {
+		counter = 2
+	} else if fn == "50.csv" {
+		counter = 3
+	}
+	for _, f := range dir {
+		name := f.Name()
+		if hourCounter%5 == 4 {
+			counter = 0
+			hourCounter = 0
+			hour++
+		}
+		if hour == 24 {
+			hour = 0
+		}
+		str := strconv.Itoa(hour)
+		if strings.Contains(name, str+fn) {
+			// fmt.Println("file exist: ", name)
+			exist = true
+		} else if !strings.Contains(name, str+fn) {
+			exist = false
+		}
+		if exist {
+			// fmt.Println("file not exist: ", name)
+			fmt.Println("file exist: ", name, counter, hourCounter)
+		} else if !exist && counter == hourCounter {
+			fmt.Println("file not exist: ", name, counter, hourCounter)
+		}
+		hourCounter++
+		counter++
+		exist = false
+	}
+	return fileName
+}
+
+func GetTL02MissingFiles() {
+	// a[24:26]
+}
