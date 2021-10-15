@@ -449,36 +449,119 @@ func CheckTL02MissingFile() {
 	var counter, counter1, counter2, counter3, counter4 int
 	var namePrevious05, namePrevious20, namePrevious35, namePrevious50 string
 	var nameNow05, nameNow20, nameNow35, nameNow50 string
+	var fn string
 	if err != nil {
 		log.Println("Cannot read directory when update octopus upload")
 		return
 	}
-	for i, f := range dir {
+	for _, f := range dir {
 		name := f.Name()
 		if strings.Contains(name, "05.csv") {
 			nameNow05 = name
 			counter1++
+			if counter1 > 1 {
+				now, err := strconv.Atoi(nameNow05[23:25])
+				if err != nil {
+					log.Println("convert now to int failed")
+				}
+				previous, err := strconv.Atoi(namePrevious05[23:25])
+				if err != nil {
+					log.Println("convert previous to int failed")
+				}
+				if now != 0 {
+					if now-previous != 1 {
+						for a := 1; a < now-previous; a++ {
+							if previous < 10 {
+								fn = name[0:23] + "0" + strconv.Itoa(previous+a) + "05.csv"
+								log.Println("Missing files: ", fn)
+							} else {
+								fn = name[0:23] + strconv.Itoa(previous+a) + "05.csv"
+								log.Println("Missing files: ", fn)
+							}
+
+						}
+					}
+				}
+			}
 		} else if strings.Contains(name, "20.csv") {
 			nameNow20 = name
 			counter2++
+			if counter2 > 1 {
+				now, err := strconv.Atoi(nameNow20[23:25])
+				if err != nil {
+					log.Println("convert now to int failed")
+				}
+				previous, err := strconv.Atoi(namePrevious20[23:25])
+				if err != nil {
+					log.Println("convert previous to int failed")
+				}
+				if now != 0 {
+					if now-previous != 1 {
+						for a := 1; a < now-previous; a++ {
+							if now < 10 {
+								fn = name[0:23] + "0" + strconv.Itoa(previous+a) + "20.csv"
+								log.Println("Missing files: ", fn)
+							} else {
+								fn = name[0:23] + strconv.Itoa(previous+a) + "20.csv"
+								log.Println("Missing files: ", fn)
+							}
+						}
+					}
+				}
+			}
 		} else if strings.Contains(name, "35.csv") {
 			nameNow35 = name
 			counter3++
+			if counter3 > 1 {
+				now, err := strconv.Atoi(nameNow35[23:25])
+				if err != nil {
+					log.Println("convert now to int failed")
+				}
+				previous, err := strconv.Atoi(namePrevious35[23:25])
+				if err != nil {
+					log.Println("convert previous to int failed")
+				}
+				if now != 0 {
+					if now-previous != 1 {
+						for a := 1; a < now-previous; a++ {
+							if now < 10 {
+								fn = name[0:23] + "0" + strconv.Itoa(previous+a) + "35.csv"
+								log.Println("Missing files: ", fn)
+							} else {
+								fn = name[0:23] + strconv.Itoa(previous+a) + "35.csv"
+								log.Println("Missing files: ", fn)
+							}
+						}
+					}
+				}
+			}
 		} else if strings.Contains(name, "50.csv") {
 			nameNow50 = name
 			counter4++
+			if counter4 > 1 {
+				now, err := strconv.Atoi(nameNow50[23:25])
+				if err != nil {
+					log.Println("convert now to int failed")
+				}
+				previous, err := strconv.Atoi(namePrevious50[23:25])
+				if err != nil {
+					log.Println("convert previous to int failed")
+				}
+				if now != 0 {
+					if now-previous != 1 {
+						for a := 1; a < now-previous; a++ {
+							if now < 10 {
+								fn = name[0:23] + "0" + strconv.Itoa(now-a) + "50.csv"
+								log.Println("Missing files: ", fn)
+							} else {
+								fn = name[0:23] + strconv.Itoa(now-a) + "50.csv"
+								log.Println("Missing files: ", fn)
+							}
+						}
+					}
+				}
+			}
 		}
-		if counter1 != 0 {
-			fmt.Println(i, "previours: ", namePrevious05, "now: ", nameNow05, "counter", counter1)
-		} else if counter2 != 0 {
-			fmt.Println(i, "previours: ", namePrevious20, "now: ", nameNow20, "counter", counter2)
-		} else if counter3 != 0 {
-			fmt.Println(i, "previours: ", namePrevious35, "now: ", nameNow35, "counter", counter3)
-		} else if counter4 != 0 {
-			fmt.Println(i, "previours: ", namePrevious50, "now: ", nameNow50, "counter", counter4)
-		}
-
-		// fmt.Println("move now to previous: ", namePrevious)
 		counter++
 		namePrevious05 = nameNow05
 		namePrevious20 = nameNow20
@@ -486,19 +569,15 @@ func CheckTL02MissingFile() {
 		namePrevious50 = nameNow50
 	}
 	if counter1 < 25 {
-		// GetTL02MissingFile("05.csv")
 		fmt.Println("Some 05.csv is missing")
 	}
 	if counter2 < 25 {
-		// GetTL02MissingFile("20.csv")
 		fmt.Println("Some 20.csv is missing")
 	}
 	if counter3 < 25 {
-		// GetTL02MissingFile("35.csv")
 		fmt.Println("Some 35.csv is missing")
 	}
 	if counter4 < 25 {
-		// GetTL02MissingFile("50.csv")
 		fmt.Println("Some 50.csv is missing")
 	}
 }
