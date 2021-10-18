@@ -156,7 +156,7 @@ func GetLastTxnForLastCheck() (lastTxn string) {
 		message := scanner.Text()
 		lastTxn = message
 	}
-	fmt.Println("lastTxn: ", lastTxn)
+	log.Println("lastTxn: " + lastTxn)
 	return lastTxn
 }
 
@@ -446,7 +446,8 @@ func CheckTL02FileSize() {
 }
 
 func CheckTL02MissingFile() {
-	path := "TL02/SFTP_file"
+	// path := "TL02/SFTP_file"
+	path := "TL02/SFTP_download"
 	dir, err := ioutil.ReadDir(path)
 	var counter, counter1, counter2, counter3, counter4 int
 	var namePrevious05, namePrevious20, namePrevious35, namePrevious50 string
@@ -838,7 +839,7 @@ func CheckTL02MissingFile() {
 			}
 		}
 		cal = 25 - counter1
-		fmt.Println("There are ", cal, " 05.csv is missing")
+		log.Println("There are ", cal, " 05.csv is missing")
 	}
 	if counter2 < 25 {
 		if counter2 == 0 {
@@ -863,7 +864,7 @@ func CheckTL02MissingFile() {
 			}
 		}
 		cal = 25 - counter2
-		fmt.Println("There are ", cal, " 20.csv is missing")
+		log.Println("There are ", cal, " 20.csv is missing")
 	}
 	if counter3 < 25 {
 		if counter3 == 0 {
@@ -888,7 +889,7 @@ func CheckTL02MissingFile() {
 			}
 		}
 		cal = 25 - counter3
-		fmt.Println("There are ", cal, " 35.csv is missing")
+		log.Println("There are ", cal, " 35.csv is missing")
 	}
 	if counter4 < 25 {
 		if counter4 == 0 {
@@ -913,7 +914,7 @@ func CheckTL02MissingFile() {
 			}
 		}
 		cal = 25 - counter4
-		fmt.Println("There are ", cal, " 50.csv is missing")
+		log.Println("There are ", cal, " 50.csv is missing")
 	}
 }
 
@@ -938,6 +939,24 @@ func SortTL02MissingFile() {
 	defer f.Close()
 	for i := 0; i < length; i++ {
 		f.WriteString(utils.SortASC(text)[i] + "\n")
+	}
+}
+
+func PrintTL02MissingFile() {
+	var text []string
+	fileName := "TL02/MissingFiles.txt"
+	file, err := os.Open(fileName)
+	if err != nil {
+		log.Println(err)
+	}
+	scanner := bufio.NewScanner(file)
+	scanner.Split(bufio.ScanLines)
+	for scanner.Scan() {
+		message := scanner.Text()
+		text = append(text, message)
+	}
+	for _, each_ln := range text {
+		log.Println("Missing files: " + each_ln)
 	}
 }
 
