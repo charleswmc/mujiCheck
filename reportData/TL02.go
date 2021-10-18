@@ -500,6 +500,17 @@ func CheckTL02MissingFile() {
 							}
 						}
 					}
+				} else { // case: now == 0
+					if previous-now == 22 {
+						today, err := strconv.Atoi(name[14:22])
+						if err != nil {
+							log.Println(err)
+						}
+						yesterday := strconv.Itoa(today - 1)
+						fn = name[0:14] + yesterday + "_2305.csv"
+						log.Println("Missing files: ", fn)
+						fileName.WriteString(fn + "\n")
+					}
 				}
 			}
 			if counter1 == 1 && !strings.Contains(name, first+"05.csv") {
@@ -572,6 +583,17 @@ func CheckTL02MissingFile() {
 								fileName.WriteString(fn + "\n")
 							}
 						}
+					}
+				} else { // case: now == 0
+					if previous-now == 22 {
+						today, err := strconv.Atoi(name[14:22])
+						if err != nil {
+							log.Println(err)
+						}
+						yesterday := strconv.Itoa(today - 1)
+						fn = name[0:14] + yesterday + "_2320.csv"
+						log.Println("Missing files: ", fn)
+						fileName.WriteString(fn + "\n")
 					}
 				}
 			}
@@ -646,6 +668,17 @@ func CheckTL02MissingFile() {
 							}
 						}
 					}
+				} else { // case: now == 0
+					if previous-now == 22 {
+						today, err := strconv.Atoi(name[14:22])
+						if err != nil {
+							log.Println(err)
+						}
+						yesterday := strconv.Itoa(today - 1)
+						fn = name[0:14] + yesterday + "_2335.csv"
+						log.Println("Missing files: ", fn)
+						fileName.WriteString(fn + "\n")
+					}
 				}
 			}
 			if counter3 == 1 && !strings.Contains(name, first+"35.csv") {
@@ -718,6 +751,21 @@ func CheckTL02MissingFile() {
 								fileName.WriteString(fn + "\n")
 							}
 						}
+					}
+
+				} else { // case: now == 0
+					if previous-now == 22 {
+						today, err := strconv.Atoi(name[14:22])
+						if err != nil {
+							log.Println(err)
+						}
+						yesterday := strconv.Itoa(today - 1)
+						// fn = name[0:14] + yesterday + "_2250.csv"
+						// log.Println("Missing files: ", fn)
+						// fileName.WriteString(fn + "\n")
+						fn = name[0:14] + yesterday + "_2350.csv"
+						log.Println("Missing files: ", fn)
+						fileName.WriteString(fn + "\n")
 					}
 				}
 			}
