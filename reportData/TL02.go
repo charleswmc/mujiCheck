@@ -415,7 +415,7 @@ func SortTxnRecordFile() {
 
 // }
 
-func CheckTL02File() {
+func CheckTL02FileSize() {
 	path := "TL02/SFTP_file"
 	// os.ReadDir(path)
 	dir, err := ioutil.ReadDir(path)
@@ -427,13 +427,13 @@ func CheckTL02File() {
 	}
 	for _, f := range dir {
 		name := f.Name()
-		fmt.Println(name)
+		// fmt.Println(name)
 		info, err := os.Stat(path + "/" + name)
 		if err != nil {
 			log.Println(err)
 		}
 		fileSize := info.Size()
-		fmt.Println(fileSize)
+		// fmt.Println(fileSize)
 		if fileSize < 693 {
 			log.Println("File Size is abnormal, Please Check the file: ", name)
 		}
@@ -486,16 +486,16 @@ func CheckTL02MissingFile() {
 							if previous < 10 {
 								if (previous + a) < 10 {
 									fn = name[0:23] + "0" + strconv.Itoa(previous+a) + "05.csv"
-									log.Println("Missing files: ", fn)
+									// log.Println("Missing files: ", fn)
 									fileName.WriteString(fn + "\n")
 								} else {
 									fn = name[0:23] + strconv.Itoa(previous+a) + "05.csv"
-									log.Println("Missing files: ", fn)
+									// log.Println("Missing files: ", fn)
 									fileName.WriteString(fn + "\n")
 								}
 							} else {
 								fn = name[0:23] + strconv.Itoa(previous+a) + "05.csv"
-								log.Println("Missing files: ", fn)
+								// log.Println("Missing files: ", fn)
 								fileName.WriteString(fn + "\n")
 							}
 						}
@@ -508,7 +508,7 @@ func CheckTL02MissingFile() {
 						}
 						yesterday := strconv.Itoa(today - 1)
 						fn = name[0:14] + yesterday + "_2305.csv"
-						log.Println("Missing files: ", fn)
+						// log.Println("Missing files: ", fn)
 						fileName.WriteString(fn + "\n")
 					}
 				}
@@ -520,7 +520,7 @@ func CheckTL02MissingFile() {
 				}
 				if hourName == 23 {
 					fn = nameNow05[0:23] + first + "05.csv"
-					log.Println("Missing files: ", fn)
+					// log.Println("Missing files: ", fn)
 					fileName.WriteString(fn + "\n")
 				} else {
 					// case if 0
@@ -531,21 +531,21 @@ func CheckTL02MissingFile() {
 					}
 					lastDayString := strconv.Itoa(lastDay - 1)
 					fn = nameNow05[0:14] + lastDayString + "_" + first + "05.csv"
-					log.Println("Missing files: ", fn)
+					// log.Println("Missing files: ", fn)
 					fileName.WriteString(fn + "\n")
 					fn = nameNow05[0:14] + lastDayString + "_" + "23" + "05.csv"
-					log.Println("Missing files: ", fn)
+					// log.Println("Missing files: ", fn)
 					fileName.WriteString(fn + "\n")
 					if hourName > 0 {
 						for i := 0; i < hourName; i++ {
 							fnHour := strconv.Itoa(hourName - (hourName - i))
 							if (hourName - (hourName - i)) < 10 {
 								fn = nameNow05[0:23] + "0" + fnHour + "05.csv"
-								log.Println("Missing files: ", nameNow05[0:23]+"0"+fnHour+"05.csv")
+								// log.Println("Missing files: ", nameNow05[0:23]+"0"+fnHour+"05.csv")
 								fileName.WriteString(fn + "\n")
 							} else {
 								fn = nameNow05[0:23] + fnHour + "05.csv"
-								log.Println("Missing files: ", nameNow05[0:23]+fnHour+"05.csv")
+								// log.Println("Missing files: ", nameNow05[0:23]+fnHour+"05.csv")
 								fileName.WriteString(fn + "\n")
 							}
 						}
@@ -570,16 +570,16 @@ func CheckTL02MissingFile() {
 							if previous < 10 {
 								if (previous + a) < 10 {
 									fn = name[0:23] + "0" + strconv.Itoa(previous+a) + "20.csv"
-									log.Println("Missing files: ", fn)
+									// log.Println("Missing files: ", fn)
 									fileName.WriteString(fn + "\n")
 								} else {
 									fn = name[0:23] + strconv.Itoa(previous+a) + "20.csv"
-									log.Println("Missing files: ", fn)
+									// log.Println("Missing files: ", fn)
 									fileName.WriteString(fn + "\n")
 								}
 							} else {
 								fn = name[0:23] + strconv.Itoa(previous+a) + "20.csv"
-								log.Println("Missing files: ", fn)
+								// log.Println("Missing files: ", fn)
 								fileName.WriteString(fn + "\n")
 							}
 						}
@@ -592,7 +592,7 @@ func CheckTL02MissingFile() {
 						}
 						yesterday := strconv.Itoa(today - 1)
 						fn = name[0:14] + yesterday + "_2320.csv"
-						log.Println("Missing files: ", fn)
+						// log.Println("Missing files: ", fn)
 						fileName.WriteString(fn + "\n")
 					}
 				}
@@ -604,7 +604,7 @@ func CheckTL02MissingFile() {
 				}
 				if hourName == 23 {
 					fn = nameNow20[0:23] + first + "20.csv"
-					log.Println("Missing files: ", fn)
+					// log.Println("Missing files: ", fn)
 					fileName.WriteString(fn + "\n")
 				} else {
 					// case if 0
@@ -615,21 +615,21 @@ func CheckTL02MissingFile() {
 					}
 					lastDayString := strconv.Itoa(lastDay - 1)
 					fn = nameNow20[0:14] + lastDayString + "_" + first + "20.csv"
-					log.Println("Missing files: ", fn)
+					// log.Println("Missing files: ", fn)
 					fileName.WriteString(fn + "\n")
 					fn = nameNow20[0:14] + lastDayString + "_" + "23" + "20.csv"
-					log.Println("Missing files: ", fn)
+					// log.Println("Missing files: ", fn)
 					fileName.WriteString(fn + "\n")
 					if hourName > 0 {
 						for i := 0; i < hourName; i++ {
 							fnHour := strconv.Itoa(hourName - (hourName - i))
 							if (hourName - (hourName - i)) < 10 {
 								fn = nameNow20[0:23] + "0" + fnHour + "20.csv"
-								log.Println("Missing files: ", nameNow20[0:23]+"0"+fnHour+"20.csv")
+								// log.Println("Missing files: ", nameNow20[0:23]+"0"+fnHour+"20.csv")
 								fileName.WriteString(fn + "\n")
 							} else {
 								fn = nameNow20[0:23] + fnHour + "20.csv"
-								log.Println("Missing files: ", nameNow20[0:23]+fnHour+"20.csv")
+								// log.Println("Missing files: ", nameNow20[0:23]+fnHour+"20.csv")
 								fileName.WriteString(fn + "\n")
 							}
 						}
@@ -654,16 +654,16 @@ func CheckTL02MissingFile() {
 							if previous < 10 {
 								if (previous + a) < 10 {
 									fn = name[0:23] + "0" + strconv.Itoa(previous+a) + "35.csv"
-									log.Println("Missing files: ", fn)
+									// log.Println("Missing files: ", fn)
 									fileName.WriteString(fn + "\n")
 								} else {
 									fn = name[0:23] + strconv.Itoa(previous+a) + "35.csv"
-									log.Println("Missing files: ", fn)
+									// log.Println("Missing files: ", fn)
 									fileName.WriteString(fn + "\n")
 								}
 							} else {
 								fn = name[0:23] + strconv.Itoa(previous+a) + "35.csv"
-								log.Println("Missing files: ", fn)
+								// log.Println("Missing files: ", fn)
 								fileName.WriteString(fn + "\n")
 							}
 						}
@@ -676,7 +676,7 @@ func CheckTL02MissingFile() {
 						}
 						yesterday := strconv.Itoa(today - 1)
 						fn = name[0:14] + yesterday + "_2335.csv"
-						log.Println("Missing files: ", fn)
+						// log.Println("Missing files: ", fn)
 						fileName.WriteString(fn + "\n")
 					}
 				}
@@ -688,7 +688,7 @@ func CheckTL02MissingFile() {
 				}
 				if hourName == 23 {
 					fn = nameNow35[0:23] + first + "35.csv"
-					log.Println("Missing files: ", fn)
+					// log.Println("Missing files: ", fn)
 					fileName.WriteString(fn + "\n")
 				} else {
 					// case if 0
@@ -699,21 +699,21 @@ func CheckTL02MissingFile() {
 					}
 					lastDayString := strconv.Itoa(lastDay - 1)
 					fn = nameNow35[0:14] + lastDayString + "_" + first + "35.csv"
-					log.Println("Missing files: ", fn)
+					// log.Println("Missing files: ", fn)
 					fileName.WriteString(fn + "\n")
 					fn = nameNow35[0:14] + lastDayString + "_" + "23" + "35.csv"
-					log.Println("Missing files: ", fn)
+					// log.Println("Missing files: ", fn)
 					fileName.WriteString(fn + "\n")
 					if hourName > 0 {
 						for i := 0; i < hourName; i++ {
 							fnHour := strconv.Itoa(hourName - (hourName - i))
 							if (hourName - (hourName - i)) < 10 {
 								fn = nameNow35[0:23] + "0" + fnHour + "35.csv"
-								log.Println("Missing files: ", nameNow35[0:23]+"0"+fnHour+"35.csv")
+								// log.Println("Missing files: ", nameNow35[0:23]+"0"+fnHour+"35.csv")
 								fileName.WriteString(fn + "\n")
 							} else {
 								fn = nameNow35[0:23] + fnHour + "35.csv"
-								log.Println("Missing files: ", nameNow35[0:23]+fnHour+"35.csv")
+								// log.Println("Missing files: ", nameNow35[0:23]+fnHour+"35.csv")
 								fileName.WriteString(fn + "\n")
 							}
 						}
@@ -738,16 +738,16 @@ func CheckTL02MissingFile() {
 							if previous < 10 {
 								if (previous + a) < 10 {
 									fn = name[0:23] + "0" + strconv.Itoa(previous+a) + "50.csv"
-									log.Println("Missing files: ", fn)
+									// log.Println("Missing files: ", fn)
 									fileName.WriteString(fn + "\n")
 								} else {
 									fn = name[0:23] + strconv.Itoa(previous+a) + "50.csv"
-									log.Println("Missing files: ", fn)
+									// log.Println("Missing files: ", fn)
 									fileName.WriteString(fn + "\n")
 								}
 							} else {
 								fn = name[0:23] + strconv.Itoa(previous+a) + "50.csv"
-								log.Println("Missing files: ", fn)
+								// log.Println("Missing files: ", fn)
 								fileName.WriteString(fn + "\n")
 							}
 						}
@@ -764,7 +764,7 @@ func CheckTL02MissingFile() {
 						// log.Println("Missing files: ", fn)
 						// fileName.WriteString(fn + "\n")
 						fn = name[0:14] + yesterday + "_2350.csv"
-						log.Println("Missing files: ", fn)
+						// log.Println("Missing files: ", fn)
 						fileName.WriteString(fn + "\n")
 					}
 				}
@@ -776,7 +776,7 @@ func CheckTL02MissingFile() {
 				}
 				if hourName == 23 {
 					fn = nameNow50[0:23] + first + "50.csv"
-					log.Println("Missing files: ", fn)
+					// log.Println("Missing files: ", fn)
 					fileName.WriteString(fn + "\n")
 				} else {
 					// case if 0
@@ -787,21 +787,21 @@ func CheckTL02MissingFile() {
 					}
 					lastDayString := strconv.Itoa(lastDay - 1)
 					fn = nameNow50[0:14] + lastDayString + "_" + first + "50.csv"
-					log.Println("Missing files: ", fn)
+					// log.Println("Missing files: ", fn)
 					fileName.WriteString(fn + "\n")
 					fn = nameNow50[0:14] + lastDayString + "_" + "23" + "50.csv"
-					log.Println("Missing files: ", fn)
+					// log.Println("Missing files: ", fn)
 					fileName.WriteString(fn + "\n")
 					if hourName > 0 {
 						for i := 0; i < hourName; i++ {
 							fnHour := strconv.Itoa(hourName - (hourName - i))
 							if (hourName - (hourName - i)) < 10 {
 								fn = nameNow50[0:23] + "0" + fnHour + "50.csv"
-								log.Println("Missing files: ", nameNow50[0:23]+"0"+fnHour+"50.csv")
+								// log.Println("Missing files: ", nameNow50[0:23]+"0"+fnHour+"50.csv")
 								fileName.WriteString(fn + "\n")
 							} else {
 								fn = nameNow50[0:23] + fnHour + "50.csv"
-								log.Println("Missing files: ", nameNow50[0:23]+fnHour+"50.csv")
+								// log.Println("Missing files: ", nameNow50[0:23]+fnHour+"50.csv")
 								fileName.WriteString(fn + "\n")
 							}
 						}
@@ -828,11 +828,11 @@ func CheckTL02MissingFile() {
 				hourName := strconv.Itoa(hour + i)
 				if hour+i < 10 {
 					fn = namePrevious05[0:23] + "0" + hourName + "05.csv"
-					log.Println("Missing files: ", fn)
+					// log.Println("Missing files: ", fn)
 					fileName.WriteString(fn + "\n")
 				} else {
 					fn = namePrevious05[0:23] + hourName + "05.csv"
-					log.Println("Missing files: ", fn)
+					// log.Println("Missing files: ", fn)
 					fileName.WriteString(fn + "\n")
 				}
 			}
@@ -853,11 +853,11 @@ func CheckTL02MissingFile() {
 				hourName := strconv.Itoa(hour + i)
 				if hour+i < 10 {
 					fn = namePrevious20[0:23] + "0" + hourName + "20.csv"
-					log.Println("Missing files: ", fn)
+					// log.Println("Missing files: ", fn)
 					fileName.WriteString(fn + "\n")
 				} else {
 					fn = namePrevious20[0:23] + hourName + "20.csv"
-					log.Println("Missing files: ", fn)
+					// log.Println("Missing files: ", fn)
 					fileName.WriteString(fn + "\n")
 				}
 			}
@@ -878,11 +878,11 @@ func CheckTL02MissingFile() {
 				hourName := strconv.Itoa(hour + i)
 				if hour+i < 10 {
 					fn = namePrevious35[0:23] + "0" + hourName + "35.csv"
-					log.Println("Missing files: ", fn)
+					// log.Println("Missing files: ", fn)
 					fileName.WriteString(fn + "\n")
 				} else {
 					fn = namePrevious35[0:23] + hourName + "35.csv"
-					log.Println("Missing files: ", fn)
+					// log.Println("Missing files: ", fn)
 					fileName.WriteString(fn + "\n")
 				}
 			}
@@ -903,11 +903,11 @@ func CheckTL02MissingFile() {
 				hourName := strconv.Itoa(hour + i)
 				if hour+i < 10 {
 					fn = namePrevious50[0:23] + "0" + hourName + "50.csv"
-					log.Println("Missing files: ", fn)
+					// log.Println("Missing files: ", fn)
 					fileName.WriteString(fn + "\n")
 				} else {
 					fn = namePrevious50[0:23] + hourName + "50.csv"
-					log.Println("Missing files: ", fn)
+					// log.Println("Missing files: ", fn)
 					fileName.WriteString(fn + "\n")
 				}
 			}
