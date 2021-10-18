@@ -417,7 +417,9 @@ func SortTxnRecordFile() {
 
 func CheckTL02File() {
 	path := "TL02/SFTP_file"
-	dir, err := os.ReadDir(path)
+	// os.ReadDir(path)
+	dir, err := ioutil.ReadDir(path)
+	// dir, err := os.ReadDir(path)
 	var counter int
 	if err != nil {
 		log.Println("Cannot read directory when update octopus upload")
@@ -445,15 +447,19 @@ func CheckTL02File() {
 
 func CheckTL02MissingFile() {
 	path := "TL02/SFTP_file"
-	dir, err := os.ReadDir(path)
+	dir, err := ioutil.ReadDir(path)
 	var counter, counter1, counter2, counter3, counter4 int
 	var namePrevious05, namePrevious20, namePrevious35, namePrevious50 string
 	var nameNow05, nameNow20, nameNow35, nameNow50 string
 	var fn string
+	var cal int
+	first := "22"
+	last := "22"
 	if err != nil {
 		log.Println("Cannot read directory when update octopus upload")
 		return
 	}
+	// if the first/last file is missed, can't println the file name
 	for _, f := range dir {
 		name := f.Name()
 		if strings.Contains(name, "05.csv") {
@@ -472,16 +478,55 @@ func CheckTL02MissingFile() {
 					if now-previous != 1 {
 						for a := 1; a < now-previous; a++ {
 							if previous < 10 {
-								fn = name[0:23] + "0" + strconv.Itoa(previous+a) + "05.csv"
-								log.Println("Missing files: ", fn)
+								if (previous + a) < 10 {
+									fn = name[0:23] + "0" + strconv.Itoa(previous+a) + "05.csv"
+									log.Println("Missing files: ", fn)
+								} else {
+									fn = name[0:23] + strconv.Itoa(previous+a) + "05.csv"
+									log.Println("Missing files: ", fn)
+								}
 							} else {
 								fn = name[0:23] + strconv.Itoa(previous+a) + "05.csv"
 								log.Println("Missing files: ", fn)
 							}
-
 						}
 					}
 				}
+			}
+			// fmt.Println(counter1)
+			if counter1 == 1 && !strings.Contains(name, first+"05.csv") {
+				//get the nameNow, if nameNow == 23 -> miss file == 22
+				// if nameNow == 00, miss file 22,23
+				// if nameNow == 01,
+				hourName, err := strconv.Atoi(nameNow05[23:25])
+				if err != nil {
+					log.Println("convert hourName from string to int failed", err)
+				}
+				if hourName == 23 {
+					log.Println("Missing files: ", nameNow05[0:23]+first+"05.csv")
+				} else {
+					// case if 0
+					log.Println("Missing files: ", nameNow05[0:23]+first+"05.csv")
+					log.Println("Missing files: ", nameNow05[0:23]+"23"+"05.csv")
+					if hourName > 0 {
+						// fmt.Println(hourName)
+						for i := 1; i < hourName+1; i++ {
+							// fmt.Println(i)
+							// fmt.Println(hourName)
+							fnHour := strconv.Itoa(hourName - (hourName - i))
+							if (hourName - (hourName - i)) < 10 {
+								log.Println("Missing files: ", nameNow05[0:23]+"0"+fnHour+"05.csv")
+							} else {
+								log.Println("Missing files: ", nameNow05[0:23]+fnHour+"05.csv")
+							}
+						}
+					}
+					// log.Println("file now: ", nameNow05)
+				}
+				// log.Println("Missing files: ", nameNow05[0:23]+first+"05.csv")
+			}
+			if counter1 == 25 && !strings.Contains(name, last+"05.csv") {
+				log.Println("Missing files: ", namePrevious05[0:23]+last+"05.csv")
 			}
 		} else if strings.Contains(name, "20.csv") {
 			nameNow20 = name
@@ -569,22 +614,26 @@ func CheckTL02MissingFile() {
 		namePrevious50 = nameNow50
 	}
 	if counter1 < 25 {
-		fmt.Println("Some 05.csv is missing")
+		cal = 25 - counter1
+		fmt.Println("There are ", cal, " 05.csv is missing")
 	}
 	if counter2 < 25 {
-		fmt.Println("Some 20.csv is missing")
+		cal = 25 - counter2
+		fmt.Println("There are ", cal, " 20.csv is missing")
 	}
 	if counter3 < 25 {
-		fmt.Println("Some 35.csv is missing")
+		cal = 25 - counter3
+		fmt.Println("There are ", cal, " 35.csv is missing")
 	}
 	if counter4 < 25 {
-		fmt.Println("Some 50.csv is missing")
+		cal = 25 - counter4
+		fmt.Println("There are ", cal, " 50.csv is missing")
 	}
 }
 
 func GetTL02MissingFile(fn string) (fileName string) {
 	path := "TL02/SFTP_file"
-	dir, err := os.ReadDir(path)
+	dir, err := ioutil.ReadDir(path)
 	var counter, hourCounter int
 	exist := false
 	if err != nil {
@@ -629,8 +678,4 @@ func GetTL02MissingFile(fn string) (fileName string) {
 		exist = false
 	}
 	return fileName
-}
-
-func GetTL02MissingFiles() {
-	// a[24:26]
 }
