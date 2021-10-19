@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"mujiCheck/smtp"
 	"mujiCheck/utils"
 	"os"
 	"strconv"
@@ -14,11 +15,11 @@ import (
 
 func CheckTL02() {
 	log.Println("----------Start Checking TL02 Daily----------")
-	lastTxn := GetLastTxnForLastCheck()
+	// lastTxn := GetLastTxnForLastCheck()
 	var (
-		text                []string
-		missRecord          string
-		counter, txn1, txn2 int
+		text, missRecordSlice []string
+		missRecord            string
+		counter, txn1, txn2   int
 	)
 	file, err := os.Open("sortedAll2One_TL02.csv")
 	if err != nil {
@@ -51,7 +52,7 @@ func CheckTL02() {
 		if strings.Contains(each_ln, `-`) {
 			SaveTxnNo(each_ln[6:16])
 			if i == 0 {
-				CheckTxnStartCorrect(lastTxn[6:16], each_ln[6:16])
+				// CheckTxnStartCorrect(lastTxn[6:16], each_ln[6:16])
 				f.WriteString(each_ln + "\n")
 			} else if _, err := f.WriteString(each_ln + "\n"); err != nil {
 				log.Println(err)
@@ -71,27 +72,33 @@ func CheckTL02() {
 							if !utils.CheckIfItIsRepost(miss) {
 								if len(strconv.Itoa(txn2)) == 3 {
 									missRecord = "30101-0000000" + strconv.Itoa(miss)
-									fmt.Println("Missing Txn Record: " + missRecord)
+									log.Println("Missing Txn Record: " + missRecord)
+									missRecordSlice = append(missRecordSlice, missRecord)
 								}
 								if len(strconv.Itoa(txn2)) == 4 {
 									missRecord = "30101-000000" + strconv.Itoa(miss)
-									fmt.Println("Missing Txn Record: " + missRecord)
+									log.Println("Missing Txn Record: " + missRecord)
+									missRecordSlice = append(missRecordSlice, missRecord)
 								}
 								if len(strconv.Itoa(txn2)) == 5 {
 									missRecord = "30101-00000" + strconv.Itoa(miss)
-									fmt.Println("Missing Txn Record: " + missRecord)
+									log.Println("Missing Txn Record: " + missRecord)
+									missRecordSlice = append(missRecordSlice, missRecord)
 								}
 								if len(strconv.Itoa(txn2)) == 6 {
 									missRecord = "30101-0000" + strconv.Itoa(miss)
-									fmt.Println("Missing Txn Record: " + missRecord)
+									log.Println("Missing Txn Record: " + missRecord)
+									missRecordSlice = append(missRecordSlice, missRecord)
 								}
 								if len(strconv.Itoa(txn2)) == 7 {
 									missRecord = "30101-000" + strconv.Itoa(miss)
-									fmt.Println("Missing Txn Record: " + missRecord)
+									log.Println("Missing Txn Record: " + missRecord)
+									missRecordSlice = append(missRecordSlice, missRecord)
 								}
 								if len(strconv.Itoa(txn2)) == 8 {
 									missRecord = "30101-00" + strconv.Itoa(miss)
-									fmt.Println("Missing Txn Record: " + missRecord)
+									log.Println("Missing Txn Record: " + missRecord)
+									missRecordSlice = append(missRecordSlice, missRecord)
 								}
 							} else {
 								continue
@@ -105,6 +112,8 @@ func CheckTL02() {
 			continue
 		}
 	}
+	missRecordSliceStr := strings.Join(missRecordSlice, ",")
+	smtp.WarnTL02MissingTxnRecord(missRecordSliceStr)
 	LastTxnForLastCheck(strconv.Itoa(txn1))
 	file.Close()
 	// CheckTL02ALL()
@@ -949,7 +958,7 @@ func SortTL02MissingFile() {
 }
 
 func PrintTL02MissingFile() {
-	CheckDelayFile()
+	// CheckDelayFile()
 	log.Println("----------Print missing TL02----------")
 	defer log.Println("----------End Print missing TL02----------")
 	var text []string
@@ -968,10 +977,21 @@ func PrintTL02MissingFile() {
 	for _, each_ln := range text {
 		log.Println("Missing files: " + each_ln)
 	}
+	// text is a slice
+	// join to make text slice to string
+	if len(text) == 1 {
+		message := text[0]
+		smtp.WarnTL02MissingFiles(message)
+	}
+	if len(text) > 1 {
+		message := strings.Join(text, ",")
+		smtp.WarnTL02MissingFiles(message)
+	}
 
 }
 
-func GetTL02MissingFile(fn string) (fileName string) {
+// Non-used function
+func GetTL02MissingFile(fn string) (fileName string) { // no use
 	path := "TL02/SFTP_file"
 	dir, err := ioutil.ReadDir(path)
 	var counter, hourCounter int
@@ -1020,7 +1040,7 @@ func GetTL02MissingFile(fn string) (fileName string) {
 	return fileName
 }
 
-func CheckDelayFile() { // delay 1 min, or no report is generated
+func CheckDelayFile() { // delay 1 min, or no report is generated (some bug miss occur. no use for this moment)
 	log.Println("----------Checking whether the file is delayed----------")
 	defer log.Println("----------End Checking whether the file is delayed----------")
 	var text, missingFn []string
