@@ -237,6 +237,7 @@ func CheckTL02ALL() {
 	if err != nil {
 		log.Println(err)
 	}
+	// defer file.Close()
 	scanner := bufio.NewScanner(file)
 	scanner.Split(bufio.ScanLines)
 	for scanner.Scan() {
@@ -357,6 +358,7 @@ func SaveToSortTxnRecordFile() { // Save Txn Record to TxnRecord_Sort.txt
 	if err != nil {
 		log.Println(err)
 	}
+	defer file.Close()
 	scanner := bufio.NewScanner(file)
 	scanner.Split(bufio.ScanLines)
 	for scanner.Scan() {
@@ -385,6 +387,7 @@ func SortTxnRecordFile() {
 	if err != nil {
 		log.Println(err)
 	}
+	defer file.Close()
 	scanner := bufio.NewScanner(file)
 	scanner.Split(bufio.ScanLines)
 	for scanner.Scan() {
@@ -467,6 +470,7 @@ func CheckTL02MissingFile() {
 	if err != nil {
 		log.Println("Open missingFiles.txt failed. ", err)
 	}
+	defer fileName.Close()
 	// if the first/last file is missed, can't println the file name
 	for _, f := range dir {
 		name := f.Name()
@@ -926,6 +930,7 @@ func SortTL02MissingFile() {
 	if err != nil {
 		log.Println(err)
 	}
+	defer file.Close()
 	scanner := bufio.NewScanner(file)
 	scanner.Split(bufio.ScanLines)
 	for scanner.Scan() {
@@ -944,12 +949,16 @@ func SortTL02MissingFile() {
 }
 
 func PrintTL02MissingFile() {
+	CheckDelayFile()
+	log.Println("----------Print missing TL02----------")
+	defer log.Println("----------End Print missing TL02----------")
 	var text []string
 	fileName := "TL02/MissingFiles.txt"
 	file, err := os.Open(fileName)
 	if err != nil {
 		log.Println(err)
 	}
+	defer file.Close()
 	scanner := bufio.NewScanner(file)
 	scanner.Split(bufio.ScanLines)
 	for scanner.Scan() {
@@ -959,6 +968,7 @@ func PrintTL02MissingFile() {
 	for _, each_ln := range text {
 		log.Println("Missing files: " + each_ln)
 	}
+
 }
 
 func GetTL02MissingFile(fn string) (fileName string) {
@@ -1008,4 +1018,86 @@ func GetTL02MissingFile(fn string) (fileName string) {
 		exist = false
 	}
 	return fileName
+}
+
+func CheckDelayFile() { // delay 1 min, or no report is generated
+	log.Println("----------Checking whether the file is delayed----------")
+	defer log.Println("----------End Checking whether the file is delayed----------")
+	var text, missingFn []string
+	fnSlice := GetTL02MissingFiles()
+	path := "TL02/SFTP_download"
+	dir, err := ioutil.ReadDir(path)
+	// log.Println(fnSlice)
+	if err != nil {
+		log.Println("open TL02/SFTP_download dir failed. ", err)
+	}
+	for _, f := range dir {
+		name := f.Name()
+		text = append(text, name)
+	}
+	// log.Println(text)
+	for i := 0; i < len(fnSlice); i++ {
+		if utils.SliceContains(text, fnSlice[i]) {
+			// log.Println("File exists: ", fnSlice[i])
+			// rm fnSlice[i] in missing files
+			// utils.RemoveStringInSlice(text, fnSlice[i])
+			// if i > 0 {
+			// 	fnSlice = utils.RemoveStringInSlice(fnSlice, fnSlice[i-1])
+			// } else {
+			// fnSlice = utils.RemoveStringInSlice(fnSlice, fnSlice[i])
+			// }
+			// log.Println(i, fnSlice[i])
+			// log.Println("text[]:", text)
+			// log.Println("fnSlice[]:", fnSlice)
+			log.Println("File exists: ", fnSlice[i])
+			continue
+		} else {
+			missingFn = append(missingFn, fnSlice[i])
+		}
+	}
+	log.Println(missingFn)
+	WriteStringToTL02MissingFiles(missingFn)
+}
+
+func GetTL02MissingFiles() (fnSlice []string) {
+	var text []string
+	var fn string
+	missingFile := "TL02/MissingFiles.txt"
+	file, err := os.Open(missingFile)
+	if err != nil {
+		log.Println("open TL02/MissingFiles.txt failed. ", err)
+	}
+	defer file.Close()
+	scanner := bufio.NewScanner(file)
+	scanner.Split(bufio.ScanLines)
+	for scanner.Scan() {
+		message := scanner.Text()
+		text = append(text, message)
+	}
+	for _, each_ln := range text {
+		// log.Println(each_ln[0:26])
+		if each_ln[26:27] == "0" {
+			fn = each_ln[0:26] + "1.csv"
+		} else if each_ln[26:27] == "5" {
+			fn = each_ln[0:26] + "6.csv"
+		}
+		// log.Println(fn)
+		fnSlice = append(fnSlice, fn)
+	}
+	// log.Println(fnSlice)
+	return fnSlice
+}
+
+func WriteStringToTL02MissingFiles(fn []string) {
+	// os.Remove("TL02/MissingFiles.txt") //Remove before checking another day
+	missingFiles := "TL02/MissingFiles.txt"
+	os.Remove(missingFiles)
+	file, err := os.OpenFile(missingFiles, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		log.Println("Open missingFiles.txt failed. ", err)
+	}
+	defer file.Close()
+	for i := 0; i < len(fn); i++ {
+		file.WriteString(fn[i] + "\n")
+	}
 }
