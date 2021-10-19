@@ -416,7 +416,8 @@ func SortTxnRecordFile() {
 // }
 
 func CheckTL02FileSize() {
-	path := "TL02/SFTP_file"
+	path := "TL02/SFTP_download"
+	// path := "TL02/SFTP_file"
 	// os.ReadDir(path)
 	dir, err := ioutil.ReadDir(path)
 	// dir, err := os.ReadDir(path)
