@@ -104,6 +104,8 @@ func CheckTL02() {
 								continue
 							}
 						}
+						missRecordSliceStr := strings.Join(missRecordSlice, ",")
+						smtp.WarnTL02MissingTxnRecord(missRecordSliceStr)
 					}
 					txn1 = txnNoInInt
 				}
@@ -112,8 +114,7 @@ func CheckTL02() {
 			continue
 		}
 	}
-	missRecordSliceStr := strings.Join(missRecordSlice, ",")
-	smtp.WarnTL02MissingTxnRecord(missRecordSliceStr)
+
 	LastTxnForLastCheck(strconv.Itoa(txn1))
 	file.Close()
 	// CheckTL02ALL()
@@ -241,6 +242,8 @@ func CheckTL02ALL() {
 	var txnFirst, txnAfter int
 	var missRecord string
 	// fileName := "TL02/8042/TxnRecord_Saved.txt"
+	filepath := os.Getenv("TxnRecord_Sort")
+	log.Println("filepath:", filepath)
 	fileName := "TL02/8042/TxnRecord_Sort.txt"
 	file, err := os.Open(fileName)
 	if err != nil {
@@ -275,7 +278,7 @@ func CheckTL02ALL() {
 					// log.Println("Miss record ARRRRRRRRRRRRRRRRRRRRRRRRRR")
 					miss := txnFirst + a
 					if len(strconv.Itoa(txnAfter)) == 3 {
-						missRecord = "30101-0000000" + strconv.Itoa(miss)
+						missRecord = "30101-0000000" + strconv.Itoa(miss) + "asdasd"
 					}
 					if len(strconv.Itoa(txnAfter)) == 4 {
 						missRecord = "30101-000000" + strconv.Itoa(miss)
